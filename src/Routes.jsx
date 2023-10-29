@@ -1,8 +1,4 @@
-import { Route,Routes } from "react-router-dom"
-import Home from "./Pages/Home"
-import Business from "./Pages/Business"
-import Entertainment from "./Pages/Entertainment"
-import Sports from "./Pages/Sports"
+import { Outlet } from "react-router-dom"
 import Navbar from "./Components/Navbar"
 import Footer from "./Components/Footer"
 import { createContext, useState } from "react"
@@ -21,14 +17,7 @@ export default function RoutesHandle(){
   <MyContext.Provider value={{display,isOpen,setDisplay,setIsOpen}}>
        
 <Navbar/>
-     <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/business" element={<Business/>}/>
-      <Route path="/entertainment" element={<Entertainment/>}/>
-      <Route path="/sports" element={<Sports/>}/>
-      
-      
-     </Routes>
+    <Outlet/>
 
      <Footer/>
      </MyContext.Provider>
