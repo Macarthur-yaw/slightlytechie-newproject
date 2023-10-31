@@ -10,6 +10,7 @@ import Dashboard from "./AunthenticatedPages/Dashboard";
 import DashboardHome from "./AunthenticatedPages/DashboardHome";
 import DashboardHelp from "./AunthenticatedPages/DashboardHelp";
 import DashboardMain from "./AunthenticatedPages/DashboardMain";
+import NewPage from "./AunthenticatedPages/NewPage";
 // import Authenticate from "./AunthenticatedPages/Authenticate";
 const App = () => {
   return ( 
@@ -31,7 +32,7 @@ const App = () => {
         <Route path="Home" element={<DashboardHome/>}/>
         <Route path="Help" element={<DashboardHelp/>}/>
         <Route path="Main" element={<DashboardMain/>}/>
-
+<Route path="Add" element={<NewPage/>}/>
         </Route>
       {/* <Route path='Authenticate' element={<Authenticate/>}/> */}
 
