@@ -8,7 +8,7 @@ import { Route,Routes } from "react-router-dom";
 import SigninPage from "./Pages/SigninPage";
 import Dashboard from "./AunthenticatedPages/Dashboard";
 import DashboardHome from "./AunthenticatedPages/DashboardHome";
-import DashboardHelp from "./AunthenticatedPages/DashboardHelp";
+// import DashboardHelp from "./AunthenticatedPages/DashboardHelp";
 import DashboardMain from "./AunthenticatedPages/DashboardMain";
 import NewPage from "./AunthenticatedPages/NewPage";
 // import Authenticate from "./AunthenticatedPages/Authenticate";
@@ -30,9 +30,10 @@ const App = () => {
       <Route path="signin" element={<SigninPage/>}/>
       <Route path="Dashboard/" element={<Dashboard/>}>
         <Route path="Home" element={<DashboardHome/>}/>
-        <Route path="Help" element={<DashboardHelp/>}/>
+        {/* <Route path="Help" element={<DashboardHelp/>}/> */}
         <Route path="Main" element={<DashboardMain/>}/>
 <Route path="Add" element={<NewPage/>}/>
+<Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Route>
       {/* <Route path='Authenticate' element={<Authenticate/>}/> */}
 

@@ -42,11 +42,14 @@ dispatch({type:'updateName',payload:e.target.value})
         if (state.name === "" || state.password === "") {
           dispatch({ type: 'updateError' });
           console.log("Nothing has been typed");
+       sessionStorage.setItem('isLoggedIn',false)
+       console.log(sessionStorage.getItem('isLoggedIn'))
         } else {
           console.log('next');
-          sessionStorage.setItem('isLoggedIn', true); // Set 'isLoggedIn' to true for authentication
-          navigate('/Dashboard');
+          sessionStorage.setItem('isLoggedIn', true); 
+        //   navigate('/Dashboard');
         }
+        console.log(sessionStorage.getItem('isLoggedIn'))
       }
       
 

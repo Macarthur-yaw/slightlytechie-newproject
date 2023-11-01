@@ -2,10 +2,9 @@ import { useNavigate } from "react-router-dom";
 
 export function useAuthenticated() {
   const navigate = useNavigate();
-  const isLogin = sessionStorage.getItem('isLoggedIn');
-
- 
+  
   const isAuthenticated = () => {
+    const isLogin = sessionStorage.getItem('isLoggedIn');
     if (isLogin) {
       navigate('/Dashboard');
     } else {
@@ -13,7 +12,5 @@ export function useAuthenticated() {
     }
   };
 
-  return {
-    isAuthenticated,
-  };
+  return isAuthenticated;
 }
