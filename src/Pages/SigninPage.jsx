@@ -39,14 +39,16 @@ dispatch({type:'updateName',payload:e.target.value})
         console.log(state.name);
         console.log(state.password);
       
-        if (state.name === "" || state.password === "") {
-          dispatch({ type: 'updateError' });
-          console.log("Nothing has been typed");
-       sessionStorage.setItem('isLoggedIn',false)
+        if (state.name === "Kevin" && state.password === "kevin") {
+            sessionStorage.setItem('isLoggedIn', true); 
+            navigate('/Dashboard');
+        //   console.log("Nothing has been typed");
+       
        console.log(sessionStorage.getItem('isLoggedIn'))
         } else {
           console.log('next');
-          sessionStorage.setItem('isLoggedIn', true); 
+          dispatch({ type: 'updateError' });
+          sessionStorage.setItem('isLoggedIn',false)
         //   navigate('/Dashboard');
         }
         console.log(sessionStorage.getItem('isLoggedIn'))
@@ -85,6 +87,7 @@ To publish News.
 </span>
 
 <div className="flex flex-col gap-10">
+    
 <span className="flex flex-col gap-2">
 Username
                 <input

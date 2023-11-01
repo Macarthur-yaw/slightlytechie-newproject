@@ -5,14 +5,24 @@ import { useRef, useState } from 'react'
 import NewPage from './NewPage'
 import DashboardMain from './DashboardMain'
 import DashboardSettings from './DashboardSettings'
-import { useAuthenticated } from './useAuthenticated'
+import  useAuthenticated  from './useAuthenticated'
+import { useEffect } from 'react'
 const Dashboard = () => {
 const divRef=useRef(null)
 const navigate=useNavigate();
   const[post,setPost]=useState(false)
 const [help,setHelp]=useState(false)
 const[settings,setSettings]=useState(false)
-const authenticate=useAuthenticated()
+const auth=useAuthenticated()
+
+useEffect(()=>{
+  if(!auth){
+      navigate("/signin");
+      console.log("name is not set");
+  }
+
+})
+
 function showPost(){
 setPost(true)
   }
@@ -34,7 +44,7 @@ sessionStorage.clear();
   }
     return (
         <div >
-          {authenticate ? console.log('authentication is not set'):navigate('/signin')}
+          {/* {authenticate ? console.log('authentication is not set'):navigate('/signin')} */}
 <div id="verticalBar" className='bg-white  border-[1px] border-gray-200 w-[30%] md:w-[20%] h-screen flex flex-col justify-center  justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-2 items-center'>
 
 <h1 className='py-4 font-bold text-[20px]'>
