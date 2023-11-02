@@ -91,7 +91,7 @@ const DashboardHome = () => {
     <div className={`${display ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-20  ':'bg-white'}`}>
    
    
-   <div className="flex flex-row ml-auto items-center w-[80%] md:justify-between justify-around p-4 shadow-sm">
+   <div className="flex flex-row hidden md:block md:ml-auto items-center w-[80%] md:justify-between justify-around p-4 shadow-sm">
         <span>
           <h1 className="md:text-[40px] font-bold text-[#0A376E]">Dashboard</h1>
           <h3 className="md:text-[14px] text-[8px] font-semibold text-[#6E6E6E]">Hi Kevin, welcome back!</h3>
@@ -126,9 +126,9 @@ const DashboardHome = () => {
    
    
    
-      <div className="text-end p-2">
+      <div className=" py-2">
         <button
-          className="ml-auto text-white border-2 flex flex-row items-center text-sm max-w-[100%] justify-center bg-[#1473E6] border-[#1473E6]  gap-2 border-[2px] p-2 rounded-md"
+          className="ml-auto text-white border-2 flex flex-row items-center text-sm md:w-[100%] w-[30%] justify-center bg-[#1473E6] border-[#1473E6]  gap-2 border-[2px] p-2 rounded-md"
 onClick={changeDisplay}
         >
           {/* <FontAwesomeIcon icon={faPlus}/> */}
@@ -140,9 +140,9 @@ onClick={changeDisplay}
       {display && (
   
   
-  <div className="flex flex-col gap-2 w-full sm:w-96 rounded-md  fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-md p-4 bg-white">
+  <div className="flex flex-col gap-2 w-[80%]  rounded-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-md p-4 bg-white">
  
-    <div onClick={()=>setDisplay(false)} className="flex ml-auto p-2 hover:bg-gray-100 rounded-full transition-bg duration-300 ease-in-out w-fit cursor-pointer">
+    <div onClick={()=>setDisplay(false)} className="flex ml-auto p-2 hover:bg-gray-100 rounded-full transition-bg duration-300 ease-in-out w-fit cursor-pointer text-[20px]">
       {/* <FontAwesomeIcon onClick={() => setDisplay(false)} className="p-2 cursor-pointer" icon={faTimes} /> */}
     <FaTimes  />
     </div>
@@ -192,13 +192,13 @@ onClick={changeDisplay}
   </div>
   
       )}
-      <table className="md:w-[80%] w-[80%] ml-auto shadow-sm rounded-sm">
+      <table className="md:w-[80%] w-[100%] md:ml-auto shadow-sm rounded-sm">
             <thead>
               <tr className="flex flex-row text-gray-500 text-[12px] font-normal justify-between border-b-2">
-                <th className="px-4 py-2">Title</th>
-                <th className="px-4 py-2">Content</th>
-                <th className="px-4 py-2">Source</th>
-                <th className="px-4 py-2">Operations</th>
+                <th className="md:px-4 md:py-2">Title</th>
+                <th className="md:px-4 md:py-2">Content</th>
+                <th className="md:px-4 md:py-2">Source</th>
+                <th className="md:px-4 md:py-2">Operations</th>
               </tr>
             </thead>
             <tbody className="">
@@ -207,10 +207,10 @@ onClick={changeDisplay}
                   key={index}
                   className="w-[100%] justify-between mx-auto  flex flex-row items-center border-b-2 cursor-pointer"
                 >
-                  <td className="px-4 py-2 text-gray-500">{content.text}</td>
-                  <td className="px-4 py-2 text-gray-500 ">{content.content}</td>
-                  <td className="px-4 py-2 text-gray-600">{content.source}</td>
-                  <td className="px-4 py-2 inline-flex ">
+                  <td className="md:px-4 md:py-2 text-gray-500">{content.text}</td>
+                  <td className="md:px-4 md:py-2 text-gray-500 ">{content.content}</td>
+                  <td className="md:px-4 md:py-2 text-gray-600">{content.source}</td>
+                  <td className="md:px-4 md:py-2 inline-flex ">
                     <button
                       className="border-2 border-transparent hover-bg-[#DAE9FC] transition-bg duration-300 ease-in-out rounded-full p-2 text-[#0C4284] rounded"
                       onClick={() => updateTask(index)}

@@ -1,4 +1,4 @@
-import { FaHome,  FaSignOutAlt, FaCog, FaPlus } from 'react-icons/fa';
+import { FaHome,  FaSignOutAlt, FaCog, FaBars, FaTimes } from 'react-icons/fa';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { createContext,  useState } from 'react';
@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [help, setHelp] = useState(false);
   const [settings, setSettings] = useState(false);
   const auth = useAuthenticated()
+  const[display,setDisplay]=useState(false)
 // const[info,setInfo]=useState([])
   useEffect(() => {
     if (!auth) {
@@ -48,8 +49,14 @@ const Dashboard = () => {
 
   
   return (
-    <div>
-      <div id="verticalBar" className='bg-white  border-[1px] border-gray-200 w-[30%] md:w-[20%] h-screen flex flex-col justify-center  justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-2 items-center'>
+    <div className={`${display ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out': ''}`}>
+      <div onClick={()=>setDisplay(true)} className={`${display ? 'hidden':'block'} p-2 md:hidden border-2 rounded-full w-fit border-white hover:bg-gray-200 cursor-pointer`}>
+        <FaBars/>
+      </div>
+      <div id="verticalBar" className={`${display ? 'block absolute':'hidden'} md:block bg-white  border-[1px] border-gray-200 w-[50%] md:w-[20%] h-screen flex flex-col justify-center  justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-2 items-center`}>
+      
+      {display && ( <div onClick={()=>setDisplay(false)} className='ml-auto'> <FaTimes/></div>)}
+
         <h1 className='py-4 font-bold text-[20px] text-[#0C4284]'>
           BLOGWEB
         </h1>
