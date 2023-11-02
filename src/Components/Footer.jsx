@@ -5,7 +5,7 @@ import { MyContext } from "../App";
 const Footer = () => {
     const {display,theme}=useContext(MyContext)
     return ( 
-        <div className={` flex mb-0 flex-row items-center border-t-[0.2px] border-gray-400  p-2 justify-around`}>
+        <div className={` flex mb-0 flex-row items-center border-t-[0.2px] border-gray-800  py-4 px-[8px] md:justify-around justify-between text-[14px]`}>
 <span className="flex flex-row gap-2">
            &copy; BLOG 
 

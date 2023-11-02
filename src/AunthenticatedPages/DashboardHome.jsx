@@ -140,7 +140,7 @@ onClick={changeDisplay}
       {display && (
   
   
-  <div className="flex flex-col gap-2 w-[80%]  rounded-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-md p-4 bg-white">
+  <div className="flex flex-col gap-2 w-[80%]  rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-md p-4 bg-white">
  
     <div onClick={()=>setDisplay(false)} className="flex ml-auto p-2 hover:bg-gray-100 rounded-full transition-bg duration-300 ease-in-out w-fit cursor-pointer text-[20px]">
       {/* <FontAwesomeIcon onClick={() => setDisplay(false)} className="p-2 cursor-pointer" icon={faTimes} /> */}
