@@ -29,7 +29,7 @@ const Home = () => {
         </motion.div>
 
 
-<div className="flex flex-col gap-4 p-2">
+<div className="flex flex-col gap-4 p-2 h-screen">
   <h1 className="text-md px-6 py-4 hover:underline w-fit cursor-pointer">
     RECENT ARTICLES
   </h1>
