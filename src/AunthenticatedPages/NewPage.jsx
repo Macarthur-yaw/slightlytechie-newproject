@@ -18,25 +18,33 @@ const NewPage = (props) => {
     }
   }, [isEditMode, text, content, source]);
 
-  const addBlogs = () => {
-    const initialInput = {
+  const addBlog = () => {
+    const newBlog = {
       text: newText,
       content: newContent,
       source: newSource,
     };
-
+  
     const existingBlogs = JSON.parse(localStorage.getItem('items')) || [];
-    const updatedBlogs = [initialInput, ...existingBlogs];
-
+    const updatedBlogs = [newBlog, ...existingBlogs];
+  
+    // Update the local storage with the updated blog list
     localStorage.setItem('items', JSON.stringify(updatedBlogs));
+  
+    
+    // Pass the new blog data to the parent component
+    updateValue(newBlog);
+  
 
-    window.location.reload();
-
+    // Reset input fields and other relevant state
     setNewText('');
     setNewContent('');
     setNewSource('');
+    displayValue();
   };
-
+  
+ 
+ 
   const handleUpdate = () => {
     const updatedBlogs = JSON.parse(localStorage.getItem('items')) || [];
 
@@ -53,17 +61,14 @@ const NewPage = (props) => {
       };
 
       localStorage.setItem('items', JSON.stringify(updatedBlogs));
+
+      // Call the updateValue function to update the UI
+      updateValue(updatedBlogs);
     }
 
-    // Reload the page to reflect the updated content
-    window.location.reload();
-
-    // Clear the input fields
     setNewText('');
     setNewContent('');
     setNewSource('');
-
-    // Close the edit mode
     displayValue();
   };
 
@@ -79,7 +84,9 @@ const NewPage = (props) => {
           className="shadow-lg rounded-lg md:w-[70%] bg-white text-[#0A376E]"
         >
           <div className="p-2 border-b-[1px] p-2 border-b-gray flex flex-row justify-between items-center">
-            <h1 className="font-semibold">{isEditMode ? 'Edit Post' : 'Add new Post'}</h1>
+            <h1 className="font-semibold">
+              {isEditMode ? 'Edit Post' : 'Add new Post'}
+            </h1>
             <span
               onClick={displayValue}
               className="cursor-pointer rounded-full hover:bg-[#808080] p-2 transition-bg duration-300 ease-in-out hover:border-gray"
@@ -113,12 +120,14 @@ const NewPage = (props) => {
                 onChange={(e) => setNewSource(e.target.value)}
                 className="border-2 rounded-md"
               />
-              <button
-                onClick={isEditMode ? handleUpdate : addBlogs}
-                className="border-2 rounded bg-[#0A376E] border-[#0A376E] text-white"
-              >
-                {isEditMode ? 'Update' : 'Submit'}
-              </button>
+<button
+  onClick={() => isEditMode ? handleUpdate() : addBlog()}
+  className="border-2 rounded bg-[#0A376E] border-[#0A376E] text-white"
+>
+  {isEditMode ? 'Update' : 'Submit'}
+</button>
+
+
             </div>
           </div>
         </div>

@@ -1,8 +1,5 @@
 // import  from "react-router-dom";
 import Home from "./Pages/Home"
-import Business from "./Pages/Business"
-import Entertainment from "./Pages/Entertainment"
-import Sports from "./Pages/Sports"
 import RoutesHandle from "./Routes";
 import { Route,Routes } from "react-router-dom";
 import SigninPage from "./Pages/SigninPage";
@@ -11,19 +8,26 @@ import DashboardHome from "./AunthenticatedPages/DashboardHome";
 // import DashboardHelp from "./AunthenticatedPages/DashboardHelp";
 import DashboardMain from "./AunthenticatedPages/DashboardMain";
 import NewPage from "./AunthenticatedPages/NewPage";
+import NextPage from "./Pages/NextPage";
 // import Authenticate from "./AunthenticatedPages/Authenticate";
+import { createContext,useState } from "react";
+
+const MyContext =createContext();
 const App = () => {
+  const [display, setDisplay] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const[theme,setTheme]=useState(false)  
+  
   return ( 
     <>
    
+   <MyContext.Provider value={{display,theme,setTheme,isOpen,setDisplay,setIsOpen}}>
 
      <Routes>
 
       <Route path='/' element={<RoutesHandle/>}>
-      <Route path="/home" element={<Home/>}/>
-      <Route path="/business" element={<Business/>}/>
-      <Route path="/entertainment" element={<Entertainment/>}/>
-      <Route path="/sports" element={<Sports/>}/>
+      <Route index path="/" element={<Home/>}/>
+      <Route path='/next/:id' element={<NextPage/>}/>
      
       
       </Route>
@@ -38,9 +42,10 @@ const App = () => {
       {/* <Route path='Authenticate' element={<Authenticate/>}/> */}
 
      </Routes>
-
+</MyContext.Provider>
     </>
    );
 }
- 
+export {MyContext}
+
 export default App;

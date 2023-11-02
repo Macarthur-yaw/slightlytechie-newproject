@@ -1,140 +1,105 @@
-import { useReducer } from 'react'
-import sideImage from '../assets/sideImage.jpg'
-import {FaBullhorn} from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { useContext, useReducer } from 'react';
+import { FaBullhorn } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { MyContext } from '../App';
 
-const initialState={
-    name:"",
-    password:"",
-    error:false
+const initialState = {
+  name: "",
+  password: "",
+  error: false,
+  message: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'updateName':
+      return { ...state, name: action.payload };
+    case 'updatePassword':
+      return { ...state, password: action.payload };
+    case 'updateError':
+      return { ...state, error: true };
+    case 'updateSignup':
+      return { ...state, message: true };
+    default:
+      return state;
+  }
 }
 
-function reducer(state,action){
-    switch(action.type){
+const SigninPage = () => {
+  const navigate = useNavigate();
+  const [state, dispatch] = useReducer(reducer, initialState);
+const {theme}=useContext(MyContext)
 
-        case 'updateName':return {...state,name:action.payload}
-        case 'updatePassword':return {...state,password:action.payload}
+  function handleName(e) {
+    dispatch({ type: 'updateName', payload: e.target.value });
+  }
 
-        case 'updateError':return {...state,error:true}
-        default:return state;
+  function handlePassword(e) {
+    dispatch({ type: 'updatePassword', payload: e.target.value });
+  }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (state.name && state.password) {
+      sessionStorage.setItem('isLoggedIn', true);
+      navigate('/Dashboard');
+    } else {
+      dispatch({ type: 'updateError' });
+      sessionStorage.setItem('isLoggedIn', false);
     }
-}
+  }
 
-const SigninPage=()=>{  
+  function showMessage() {
+    dispatch({ type: 'updateSignup' });
+  }
 
-    const navigate=useNavigate();
-
-    const[state,dispatch]=useReducer(reducer,initialState)
-
-    function handleName(e){
-dispatch({type:'updateName',payload:e.target.value})
-    }
-    function handlePassword(e){
-        dispatch({type:'updatePassword',payload:e.target.value})
-    }
-    
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log(state.name);
-        console.log(state.password);
-      
-        if (state.name === "Kevin" && state.password === "kevin") {
-            sessionStorage.setItem('isLoggedIn', true); 
-            navigate('/Dashboard');
-        //   console.log("Nothing has been typed");
-       
-       console.log(sessionStorage.getItem('isLoggedIn'))
-        } else {
-          console.log('next');
-          dispatch({ type: 'updateError' });
-          sessionStorage.setItem('isLoggedIn',false)
-        //   navigate('/Dashboard');
-        }
-        console.log(sessionStorage.getItem('isLoggedIn'))
-      }
-      
-
-    return (
-
-
-
-
-
-<div className='flex flex-row justify-evenly items-center p-2'>
-            <div className='p-10'>
-                <img src={sideImage} alt='a welcoming image' className='blur-sm' />
-            </div>
-            <div className="p-2 ">
-     <form onSubmit={handleSubmit} className="absolute top-1/2 transform rounded-sm -translate-y-1/2 left-1/2 transform -translate-x-1/2 md:w-[30%] w-[65%] bg-white border-white shadow-md flex mx-auto border-2 flex-col   items-center justify-evenly   md:h-[75%] h-[60%] mr-0  border-2 p-4 ">
-<span className="flex flex-col items-center gap-2">
-  <p className=' font-bold font-serif'>
-  SIGN IN 
-  </p>
-
-<h1 className="font-bold inline-flex items-center gap-2 font-serif font-bold text-[25px] text-[#188fff] ">
-    
-    BLOG NEWS 
-    <FaBullhorn/>
-
-</h1>
-
-
-
-<p className=" text-sm text-[#26282a]">
-To publish News.  
-</p>
-</span>
-
-<div className="flex flex-col gap-10">
-    
-<span className="flex flex-col gap-2">
-Username
-                <input
-                    type="text"
-onChange={handleName}
-
-                    className="outline-none text-sm 
-                    
-                    border-[1px] border-t-0 border-l-0 border-r-0
-                   md:w-[120%]
-                    "/>
-</span>
-<span className="flex flex-col gap-2">
-
-
-Password
-                <input
-                    type="password"
-                    onChange={handlePassword}
-                    className="
-                    md:w-[120%]
-                    border-[1px] outline-none border-t-0 border-l-0 border-r-0   "
-                    
-                />
-</span>
-
-<div className="flex flex-col gap-4">
-                <button className="
-                md:w-[120%]
-                p-[1px] text-sm border-2 border-[#188fff] font-semibold  bg-[#188fff] text-white ">Sign in</button>
-<button className="md:w-[120%]  p-[1px] text-sm border-[1.2px] border-[#188fff] text-[#188fff] font-semibold">
-    Sign up 
-</button>
-</div>           </div>
-
-<br/>
-{state.error && (<div className='text-[#FF0000] text-sm'>
-    Please fill the forms!
-    </div>)}   
-                </form>
-
-          
-
-
-            </div>
-        </div>
-    );
-}
+  return (
+<div className={`${theme ? 'bg-gray-950 text-gray-950':'bg-white text-black'}`}>
+<div className={`flex flex-row justify-center items-center min-h-screen`}>
+      <div className="bg-white p-8 rounded-lg shadow-lg w-[26%]">
+        <h1 className="text-3xl font-bold mb-4">Sign In</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-sm font-medium text-gray-600">Username</label>
+            <input
+              type="text"
+              id="username"
+              onChange={handleName}
+              value={state.name}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-600">Password</label>
+            <input
+              type="password"
+              id="password"
+              onChange={handlePassword}
+              value={state.password}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+          {state.error && (
+            <p className="text-red-500 text-sm mb-4">Please fill in both fields!</p>
+          )}
+          <div className="flex justify-between items-center">
+            <button
+              type="submit"
+              className="px-4 py-2 bg-gray-950 text-white rounded-md hover:bg-gray-700 transition-bg duration-300 ease-in-out focus:outline-none"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={showMessage}
+              className="text-indigo-500 hover:underline focus:outline-none"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>  );
+};
 
 export default SigninPage;

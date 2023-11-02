@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../App";
+
 const Footer = () => {
+    const {display,theme}=useContext(MyContext)
     return ( 
-        <div className="flex flex-row items-center border-2 p-2 justify-around">
+        <div className={` flex mb-0 flex-row items-center border-t-[0.2px] border-gray-400  p-2 justify-around`}>
 <span className="flex flex-row gap-2">
            &copy; BLOG 
 
@@ -14,6 +18,16 @@ const Footer = () => {
     Publish News 
 </Link>
 
+<div>
+    <ul className="list-none inline-flex gap-2">
+        <li>
+            Contact us
+        </li>
+<li>
+    Privacy & Terms
+</li>
+    </ul>
+</div>
 
         </div>
      );

@@ -3,25 +3,22 @@ import Navbar from "./Components/Navbar"
 import Footer from "./Components/Footer"
 import { createContext, useState } from "react"
 // import SigninPage from "./Pages/SigninPage"
-
-const MyContext =createContext();
-
+import { useContext } from "react"
+import { MyContext } from "./App"
  
  
-export default function RoutesHandle(){  
-    const [display, setDisplay] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-  
+export default function RoutesHandle(){ 
+  const { theme } = useContext(MyContext);
+
   return (
-    <>
-  <MyContext.Provider value={{display,isOpen,setDisplay,setIsOpen}}>
+    <div className={`${theme ? 'bg-gray-950 shadow-md text-white' : 'bg-white text-black'}`}>
        
 <Navbar/>
+
     <Outlet/>
 
-     <Footer/>
-     </MyContext.Provider>
-      </>
+    <Footer/>
+     
+    </div>
   )}
 
-export {MyContext}
