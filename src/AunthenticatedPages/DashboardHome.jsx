@@ -140,9 +140,9 @@ onClick={changeDisplay}
       {display && (
   
   
-  <div className="flex flex-col gap-2 w-[80%]  rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-md p-4 bg-white">
+  <div className="flex flex-col gap-2 w-[80%] md:w-[40%] absolute rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-md p-4 bg-white">
  
-    <div onClick={()=>setDisplay(false)} className="flex ml-auto p-2 hover:bg-gray-100 rounded-full transition-bg duration-300 ease-in-out w-fit cursor-pointer text-[20px]">
+    <div onClick={()=>setDisplay(false)} className="flex  ml-auto p-2 hover:bg-gray-100 rounded-full transition-bg duration-300 ease-in-out w-fit cursor-pointer text-[20px]">
       {/* <FontAwesomeIcon onClick={() => setDisplay(false)} className="p-2 cursor-pointer" icon={faTimes} /> */}
     <FaTimes  />
     </div>
@@ -171,15 +171,15 @@ onClick={changeDisplay}
       placeholder="Content"
     ></textarea>
     <br />
-    <input type="date"/>
+    {/* <input type="date"/> */}
     <div className="flex flex-row">
-      <button
+      {!active && (<button
         className="border-2 border-black w-full sm:w-20 mx-auto rounded bg-black text-white mb-2 sm:mb-0 sm:mr-2"
         onClick={addBlogs}
       >
         Submit
-      </button>
-  
+      </button>)
+}
       {active && updateIndex !== null && (
         <button
           className="border-2 border-black w-full sm:w-20 mx-auto rounded bg-black text-white"

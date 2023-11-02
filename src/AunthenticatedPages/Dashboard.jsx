@@ -1,24 +1,37 @@
-import { FaHome,  FaSignOutAlt, FaCog, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHome, FaSignOutAlt, FaCog, FaBars, FaTimes } from 'react-icons/fa';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { createContext,  useState } from 'react';
-// import NewPage from './NewPage';
+import { useContext, useState } from 'react';
 import DashboardMain from './DashboardMain';
 import DashboardSettings from './DashboardSettings';
 import useAuthenticated from './useAuthenticated';
 import { useEffect } from 'react';
+import { MyContext } from '../App';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// export const displayContext=createContext();
+const sidebarVariants = {
+  open: {
+    x: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+  closed: {
+    x: '-100%',
+  },
+};
 
 const Dashboard = () => {
-  // const divRef = useRef(null);
   const navigate = useNavigate();
   const [post, setPost] = useState(false);
   const [help, setHelp] = useState(false);
   const [settings, setSettings] = useState(false);
-  const auth = useAuthenticated()
-  const[display,setDisplay]=useState(false)
-// const[info,setInfo]=useState([])
+  const auth = useAuthenticated();
+  const [display, setDisplay] = useState(false);
+  const { theme, setTheme } = useContext(MyContext);
+
   useEffect(() => {
     if (!auth) {
       navigate('/signin');
@@ -29,8 +42,6 @@ const Dashboard = () => {
   function showPost() {
     setPost(true);
   }
-
- 
 
   function closeHelp() {
     setHelp(false);
@@ -44,59 +55,109 @@ const Dashboard = () => {
     sessionStorage.setItem('isLoggedIn', false);
     navigate('/');
     sessionStorage.clear();
-  }
+  };
 
-
-  
   return (
-    <div className={`${display ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out': ''}`}>
-      <div onClick={()=>setDisplay(true)} className={`${display ? 'hidden':'block'} p-2 md:hidden border-2 rounded-full w-fit border-white hover:bg-gray-200 cursor-pointer`}>
-        <FaBars/>
-      </div>
-      <div id="verticalBar" className={`${display ? 'block absolute':'hidden'} md:block bg-white  border-[1px] border-gray-200 w-[50%] md:w-[20%] h-screen flex flex-col justify-center  justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-2 items-center`}>
-      
-      {display && ( <div onClick={()=>setDisplay(false)} className='ml-auto'> <FaTimes/></div>)}
+    <div className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'}`}>
+      <AnimatePresence>
+        {display && (
+          <motion.div
+            className="fixed  top-0 left-0 h-screen w-[60%] md:hidden bg-gray-200 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={sidebarVariants}
+          >
+            <div onClick={() => setDisplay(false)} className="md:hidden ml-auto  flex-end  w-fit p-4 ">
+              <FaTimes />
+            </div>
+     <div className='flex flex-col items-center justify-between gap-[130px] py-6'>
+            <span>
+     
+            <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
+            </span>  <ul className="list-none flex flex-col gap-12 md:w-[100%]">
+              <Link to="Home">
+                <li className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer !active:bg-[#DAE9FC] !focus:bg-[#DAE9FC]">
+                  <FaHome /> Home
+                </li>
+              </Link>
+              <li
+                onClick={() => setHelp(true)}
+                className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer"
+              >
+                <AiFillQuestionCircle /> Help
+              </li>
+              <li
+                onClick={() => setSettings(true)}
+                className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover.bg-[#DAE9FC] hover.border-[#DAE9FC] hover.text-[#0C4284] cursor-pointer"
+              >
+                <FaCog /> Settings
+              </li>
+              <li
+                onClick={handleLogOut}
+                className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover.bg-[#DAE9FC] hover.border-[#DAE9FC] hover.text-[#0C4284] cursor-pointer"
+              >
+                <FaSignOutAlt /> Log Out
+              </li>
+            </ul>
+            <span className="text-sm text-[#0C4284] mt-auto">&copy; Copyright 2023.</span>
+            </div> </motion.div>
+        )}
+      </AnimatePresence>
 
-        <h1 className='py-4 font-bold text-[20px] text-[#0C4284]'>
-          BLOGWEB
-        </h1>
-
-        <ul className='list-none flex flex-col gap-12 w-[100%]'>
-          <Link to="Home">
-            <li className='flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer !active:bg-[#DAE9FC] !focus:bg-[#DAE9FC]'>
-              <FaHome /> Home
+      <div className="relative">
+        <div onClick={() => setDisplay(true)} className="md:hidden fixed top-4 left-4 z-20">
+          <FaBars />
+        </div>
+        <div className="md:block hidden md:w-[20%] md:left-0 absolute left-[20%] w-0 md:w-20 bg-white border-[1px] border-gray-200 h-screen flex flex-col justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center">
+          <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
+          <ul className="list-none flex flex-col gap-12">
+            <Link to="Home">
+              <li className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer !active:bg-[#DAE9FC] !focus:bg-[#DAE9FC]">
+                <FaHome /> Home
+              </li>
+            </Link>
+            <li
+              onClick={() => setHelp(true)}
+              className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer"
+            >
+              <AiFillQuestionCircle /> Help
             </li>
-          </Link>
-
-          <li onClick={() => setHelp(true)} className='flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer'>
-            <AiFillQuestionCircle /> Help
-          </li>
-
-          <li onClick={() => setSettings(true)} className='flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer'>
-            <FaCog /> Settings
-          </li>
-
-          <li onClick={handleLogOut} className='flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer'>
-            <FaSignOutAlt /> Log Out
-          </li>
-        </ul>
-
- <span className='text-sm text-[#0C4284]'>
-  &copy; Copyright 2023.
- </span>
+            <li
+              onClick={() => setSettings(true)}
+              className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover.bg-[#DAE9FC] hover.border-[#DAE9FC] hover.text-[#0C4284] cursor-pointer"
+            >
+              <FaCog /> Settings
+            </li>
+            <li
+              onClick={handleLogOut}
+              className="flex flex-row items-center gap-2 p-2 rounded-xl text-[#0C4284] text-[18px] hover.bg-[#DAE9FC] hover.border-[#DAE9FC] hover.text-[#0C4284] cursor-pointer"
+            >
+              <FaSignOutAlt /> Log Out
+            </li>
+          </ul>
+          <span className="text-sm text-[#0C4284] ">&copy; Copyright 2023.</span>
+        </div>
       </div>
 
-      <Outlet />
+      <div className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'}`}>
+        <Outlet />
+      </div>
 
-  
       {help && (
-        <div onClick={() => closeHelp()} className='fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out'>
+        <div
+          onClick={() => closeHelp()}
+          className="fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out"
+        >
           <DashboardMain valueHelp={closeHelp} />
         </div>
       )}
 
       {settings && (
-        <div onClick={closeSettings} className='fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out'>
+        <div
+          onClick={closeSettings}
+          className="fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out"
+        >
           <DashboardSettings valueSettings={closeSettings} />
         </div>
       )}
