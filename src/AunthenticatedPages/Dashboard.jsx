@@ -68,10 +68,10 @@ const Dashboard = () => {
             exit="closed"
             variants={sidebarVariants}
           >
-            <div onClick={() => setDisplay(false)} className="md:hidden ml-auto  flex-end  w-fit p-4 ">
+            <div onClick={() => setDisplay(false)} className="md:hidden ml-auto  flex-end  w-fit p-4 text-black ">
               <FaTimes />
             </div>
-     <div className='flex flex-col items-center justify-between gap-[130px] py-6'>
+     <div className='flex flex-col items-center justify-between gap-[100px] py-6'>
             <span>
      
             <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
@@ -106,7 +106,7 @@ const Dashboard = () => {
       </AnimatePresence>
 
       <div className="relative">
-        <div onClick={() => setDisplay(true)} className="md:hidden fixed top-4 left-4 z-20">
+        <div onClick={() => setDisplay(true)} className="md:hidden fixed top-4 left-4 z-20 text-black">
           <FaBars />
         </div>
         <div className="md:block hidden md:w-[20%] md:left-0 absolute left-[20%] w-0 md:w-20 bg-white border-[1px] border-gray-200 h-screen flex flex-col justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center">
