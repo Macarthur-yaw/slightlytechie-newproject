@@ -58,17 +58,17 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'}`}>
+    <div  className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'}`}>
       <AnimatePresence>
         {display && (
           <motion.div
-            className="fixed  top-0 left-0 h-screen w-[60%] md:hidden bg-gray-200 bg-opacity-40 z-10 transition-opacity duration-300 ease-in-out"
+            className="fixed  top-0 left-0 h-screen w-[60%] md:hidden bg-white shadow-md bg-opacity-100 z-10 transition-opacity duration-300 ease-in-out"
             initial="closed"
             animate="open"
             exit="closed"
             variants={sidebarVariants}
           >
-            <div onClick={() => setDisplay(false)} className="md:hidden ml-auto  flex-end  w-fit p-4 text-black ">
+            <div onClick={() => setDisplay(false)} className='cursor-pointer md:hidden ml-auto  flex-end  w-fit p-4 text-black '>
               <FaTimes />
             </div>
      <div className='flex flex-col items-center justify-between gap-[100px] py-6'>
@@ -106,10 +106,10 @@ const Dashboard = () => {
       </AnimatePresence>
 
       <div >
-        <div onClick={() => setDisplay(true)} className="md:hidden fixed top-4 left-4 z-20 text-black">
+        <div onClick={() => setDisplay(true)} className="md:hidden fixed top-4 left-4  text-black cursor-pointer">
           <FaBars />
         </div>
-        <div className={`${theme ? 'bg-gray-950 text-white':''}md:block hidden md:w-[20%] md:left-0 absolute left-[20%]  md:w-20 bg-white border-[1px] border-gray-200 h-screen md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
+        <div className={`${theme ? 'bg-gray-950 text-white':''} md:block hidden md:w-[20%] md:left-0 absolute left-[20%]  md:w-20 bg-white border-[1px] border-gray-200 h-screen md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
           <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
           <ul className="list-none flex flex-col gap-12">
             <Link to="">
