@@ -11,7 +11,7 @@ e.stopPropagation();
         <div onClick={handleDashboardHelp} className="border-2 md:w-[50%] w-[80%]  bg-white rounded-md border-white absolute top-1/2 transform -translate-y-1/2 left-1/2 transform -translate-x-1/2  shadow-lg md:p-6 p-2  rounded-md shadow-md">
   
   <span className=''>
-<FaTimes onClick={props.valueHelp} className='border-2 ml-auto rounded-full border-white cursor-pointer hover:bg-gray-300  p-2 text-[35px] transition-bg duration-300 ease-in-out'/>
+<FaTimes onClick={props.valueHelp} className='border-2 text-black ml-auto rounded-full border-white cursor-pointer hover:bg-gray-300  p-2 text-[35px] transition-bg duration-300 ease-in-out'/>
   </span>
   <h2 className="md:text-2xl text-md font-bold mb-4">Help and Resources</h2>
   <p className="text-md text-gray-600">

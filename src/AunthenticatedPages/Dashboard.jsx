@@ -140,7 +140,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'}`}>
+      <div className={`${theme ? '' : 'bg-white text-black'}`}>
         <Outlet />
       </div>
 

@@ -17,7 +17,7 @@ function applySettings(){
 }
 
   return (
-    <div onClick={handleCLick} className='flex flex-col gap-2 bg-white md:w-[35%] w-[70%] absolute transform -translate-x-1/2 left-1/2 top-1/2 transform -translate-y-1/2  rounded-md p-4 '>
+    <div onClick={handleCLick} className='flex flex-col gap-2 bg-white text-black md:w-[35%] w-[70%] absolute transform -translate-x-1/2 left-1/2 top-1/2 transform -translate-y-1/2  rounded-md p-4 '>
 
 <FaTimes onClick={props.valueSettings} className='cursor-pointer ml-auto'/>
 
