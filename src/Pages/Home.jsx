@@ -29,21 +29,21 @@ const Home = () => {
         </motion.div>
 
 
-<div className="flex flex-col gap-4 p-2 h-screen">
-  <h1 className="text-md px-6 py-4 hover:underline w-fit cursor-pointer">
+<div className="flex flex-col gap-4 p-2 ">
+  <h1 className="text-sm px-6 py-4 hover:underline w-fit cursor-pointer">
     RECENT ARTICLES
   </h1>
 {info.map((content, index) => (
   <div                 key={index}
   
   >
-            <Link to={`/next/${index}`}>    <div
-            className="w-[100%]  hover:shadow-lg transition-shadow duration-300 ease-in-out justify-between mx-auto  flex flex-col   cursor-pointer p-2"                >
-                  <h1 className={`px-4 py-2 ${theme ? 'text-gray-100':'text-black' } `}>{content.text}</h1>
+               <div
+            className="w-[100%]     mx-auto  flex flex-col    p-2"                >
+   <Link to={`/next/${index}`}>                <h1 className={`px-4 py-2 hover:underline transition-underline duration-300 ease-in-out ${theme ? 'text-gray-200':'text-black' } text-[20px] `}>{content.text}</h1> </Link>
                   {/* <td className="px-4 py-2 text-gray-500 ">{content.content}</td> */}
-                  <h2 className="px-4 py-2 text-gray-600 text-sm">{content.source}</h2>
+                  <h2 className="px-4 py-2  text-[12px] text-gray-400">By {content.source}</h2>
                 </div>
-                </Link>
+                
                 </div>
               ))}
      

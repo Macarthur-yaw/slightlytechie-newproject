@@ -56,9 +56,15 @@ const Dashboard = () => {
     navigate('/');
     sessionStorage.clear();
   };
+  function closeDisplay(){
+    setDisplay(false)
+  }
+  function handlePageClick(e){
+    e.stopPropagation()
+  }
 
   return (
-    <div  className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'}`}>
+    <div onClick={display && closeDisplay} className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'} ${display ? 'fixed bg-gray-950 top-0 left-0 w-screen h-screen z-10 ':'' }`}>
       <AnimatePresence>
         {display && (
           <motion.div
@@ -68,7 +74,8 @@ const Dashboard = () => {
             exit="closed"
             variants={sidebarVariants}
           >
-            <div onClick={() => setDisplay(false)} className='cursor-pointer md:hidden ml-auto  flex-end  w-fit p-4 text-black '>
+            <div onClick={handlePageClick}>
+            <div onClick={closeDisplay} className='cursor-pointer md:hidden ml-auto  flex-end  w-fit p-4 text-black '>
               <FaTimes />
             </div>
      <div className='flex flex-col items-center justify-between gap-[100px] py-6'>
@@ -101,7 +108,7 @@ const Dashboard = () => {
               </li>
             </ul>
             <span className="text-sm text-[#0C4284] mt-auto">&copy; Copyright 2023.</span>
-            </div> </motion.div>
+            </div>     </div> </motion.div>
         )}
       </AnimatePresence>
 
@@ -109,7 +116,7 @@ const Dashboard = () => {
         <div onClick={() => setDisplay(true)} className="md:hidden fixed top-4 left-4  text-black cursor-pointer">
           <FaBars />
         </div>
-        <div className={`${theme ? 'bg-gray-950 text-white':''} md:block hidden md:w-[20%] md:left-0 absolute left-[20%]  md:w-20 bg-white border-[1px] border-gray-200 h-screen md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
+        <div className={`${theme ? 'bg-gray-950 text-white':''} md:block hidden md:w-[20%] md:left-0  left-[20%]  md:w-20 bg-white border-[1px] border-gray-200 h-[100%] md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
           <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
           <ul className="list-none flex flex-col gap-12">
             <Link to="">

@@ -20,26 +20,49 @@ const DashboardHome = () => {
     if (storedInfo) {
       const getInfo = JSON.parse(storedInfo);
       setInfo(Array.isArray(getInfo) ? getInfo : []);
+      
+      if (blogs.length === 0) { 
+        setBlogs(getInfo);
+      }
     }
   }, []);
   
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const [modalContent, setModalContent] = useState("");
   
- 
+  const openModal = (content) => {
+    setModalContent(content);
+    setModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setModalContent("");
+    setModalOpen(false);
+  };
+
   function addBlogs() {
     const initialInput = {
       text: text,
       content: content,
       source: source,
     };
-
-    setBlogs([initialInput, ...blogs]);
-    localStorage.setItem("items", JSON.stringify([initialInput, ...blogs]));
-    setInfo(JSON.parse(localStorage.getItem("items")));
-
+  
+    const updatedBlogs = [...blogs, initialInput]; // Add the new article to the existing articles
+  
+    localStorage.setItem("items", JSON.stringify(updatedBlogs)); // Save the updated articles
+  
+    setBlogs(updatedBlogs);
+    setInfo(updatedBlogs);
+  
     setText("");
     setContent("");
     setSource("");
+    setDisplay(false);
+    setActive(false);
+    setUpdateIndex(null);
   }
+    
 
   function deleteTask(indexToDelete) {
     const updatedBlogs = info.filter((_, index) => index !== indexToDelete);
@@ -86,7 +109,10 @@ const DashboardHome = () => {
     setActive(false);
     setUpdateIndex(null);
   }
+function handlePageClick(e){
+  e.stopPropagation();
 
+}
   return (
     <div>
     <div  className={`${display ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-20  z-10 ':'bg-white'}`}>
@@ -97,19 +123,7 @@ const DashboardHome = () => {
           <h1 className="md:text-[40px] font-bold text-[#0A376E]">Dashboard</h1>
           <h3 className="md:text-[14px] text-[8px] font-semibold text-[#6E6E6E]">Hi Kevin, welcome back!</h3>
         </span>
-        <div className="flex flex-row items-center md:gap-6 gap-2">
-          <div className="border-2 md:w-[220px] w-[90%]  h-[20px] md:h-[40px] md:rounded-[40px] rounded-[10px] flex flex-row items-center justify-center gap-2">
-            <FaSearch className="text-[#8E8E8E]" />
-            <input
-              type="text"
-              placeholder="Search everything"
-              className="outline-none bg-transparent text-sm"
-            />
-          </div>
-          <div id="avatar">
-            <img src={avatarPic} alt="an avatar" className="md:w-[40px] w-[20px] md:h-[40px] rounded-[40px]" />
-          </div>
-        </div>
+        
       </div>
    
    
@@ -129,7 +143,7 @@ const DashboardHome = () => {
    
       <div className=" py-2 px-4">
         <button
-          className="ml-auto text-white border-2 flex flex-row items-center text-sm md:w-[10%] w-[30%] justify-center bg-[#1473E6] border-[#1473E6]  gap-2 border-[2px] p-2 rounded-md"
+          className="ml-auto z-0 text-white border-2 flex flex-row items-center text-sm md:w-[10%] w-[30%] justify-center bg-[#1473E6] border-[#1473E6]  gap-2 border-[2px] p-2 rounded-md"
 onClick={changeDisplay}
         >
           {/* <FontAwesomeIcon icon={faPlus}/> */}
@@ -138,61 +152,60 @@ onClick={changeDisplay}
           Add Blog
         </button>
       </div>
+     
       {display && (
-  
-  
-  <div className="flex flex-col gap-2 w-[80%] md:w-[40%] absolute rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg p-4 bg-white">
- 
-    <div onClick={()=>setDisplay(false)} className="flex  ml-auto p-2 hover:bg-gray-100 rounded-full transition-bg duration-300 ease-in-out w-fit cursor-pointer text-[20px] text-black">
-      {/* <FontAwesomeIcon onClick={() => setDisplay(false)} className="p-2 cursor-pointer" icon={faTimes} /> */}
-    <FaTimes  />
-    </div>
-    <h1 className="border-b-[1px] ">Add new Blog</h1>  
-    <textarea
-      className="border-2 border-black rounded p-2  text-black"
-      
-      onChange={(e) => setText(e.target.value)}
-      value={text}
-      placeholder="Title"
-    ></textarea>
-    <br />
-    <textarea
-      className="border-2 border-black rounded p-2  text-black"
-      
-      onChange={(e) => setContent(e.target.value)}
-      value={content}
-      placeholder="Source"
-    ></textarea>
-    <br />
-    <textarea
-      
-      className="border-2 border-black rounded p-2 text-black"
-      onChange={(e) => setSource(e.target.value)}
-      value={source}
-      placeholder="Content"
-    ></textarea>
-    <br />
-    {/* <input type="date"/> */}
-    <div className="flex flex-row">
-      {!active && (<button
-        className="border-2 border-black w-full sm:w-20 mx-auto rounded bg-black text-white mb-2 sm:mb-0 sm:mr-2"
-        onClick={addBlogs}
-      >
-        Submit
-      </button>)
-}
-      {active && updateIndex !== null && (
+  <div onClick={changeDisplay} className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-40">
+    <div onClick={handlePageClick} className="bg-white max-w-md  p-4 rounded-lg shadow-lg">
+    <div className="border-2 w-fit ml-auto border-white">
+    <button
+          className="text-black hover:text-red-500"
+          onClick={() => setDisplay(false)}
+        >
+          <FaTimes />
+        </button>
+</div>
+      <h1 className="text-2xl font-semibold text-[#0A376E] mb-4">Add New Blog</h1>
+      <input
+        type="text"
+        placeholder="Title"
+        className="w-full p-2 mb-4 border rounded-md"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <textarea
+        placeholder="Content"
+        className="w-full p-2 mb-4 border rounded-md"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Source"
+        className="w-full p-2 mb-4 border rounded-md"
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+      />
+      {/* Add your date and image inputs here */}
+      {updateIndex !== null ? (
         <button
-          className="border-2 border-black w-full sm:w-20 mx-auto rounded bg-black text-white"
+          className="bg-[#1473E6] w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300"
           onClick={handleUpdate}
         >
           Update
         </button>
+      ) : (
+        <button
+          className="bg-[#1473E6] w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300"
+          onClick={addBlogs}
+        >
+          Submit
+        </button>
       )}
     </div>
   </div>
-  
-      )}
+)}
+
+
       <table className="md:w-[80%] w-[100%] md:ml-auto shadow-sm rounded-sm p-2">
             <thead>
               <tr className="p-4 flex flex-row text-gray-500 text-[12px] font-normal justify-between border-b-2">
@@ -209,7 +222,20 @@ onClick={changeDisplay}
                   className="w-[100%] p-4 justify-between mx-auto  flex flex-row items-center border-b-2 cursor-pointer"
                 >
                   <td className="md:px-4 md:py-2 text-gray-500">{content.text}</td>
-                  <td className="md:px-4 md:py-2 text-gray-500 text-sm">{content.content}</td>
+               
+                  <td className="md:px-4 md:py-2 text-gray-500">
+  {content.content.length > 50 ? (
+    <div>
+      {content.content.substring(0, 50)}...
+      <span className="text-blue-500 cursor-pointer" onClick={() => openModal(content.content)}>
+        Read More
+      </span>
+    </div>
+  ) : (
+    content.content
+  )}
+</td>
+
                   <td className="md:px-4 md:py-2 text-gray-600 text-sm">{content.source}</td>
                   <td className="md:px-4 md:py-2 inline-flex ">
                     <button
@@ -229,6 +255,20 @@ onClick={changeDisplay}
               ))}
             </tbody>
           </table>
+          {isModalOpen && (
+  <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50  z-10" onClick={closeModal}>
+    <div onClick={handlePageClick} className="modal w-[80%] md:w-1/2 bg-white p-4 rounded-lg">
+     <div className=" ml-auto w-fit">
+      <span className="close  text-gray-500 text-2xl cursor-pointer text-black" onClick={closeModal}>
+        &times;
+      </span>
+      </div>
+      <p className="text-gray-700 text-sm md:text-md">{modalContent}</p>
+    </div>
+  </div>
+)}
+
+
     </div></div>
   );
 };

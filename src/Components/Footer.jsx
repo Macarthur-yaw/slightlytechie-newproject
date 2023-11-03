@@ -5,7 +5,7 @@ import { MyContext } from "../App";
 const Footer = () => {
     const {display,theme}=useContext(MyContext)
     return ( 
-        <div className={` flex mb-0 flex-row items-center border-t-[0.2px] border-gray-800  py-4 px-[8px] md:justify-around justify-between text-[10px]`}>
+        <div className={`${theme ? 'border-t-[0.1px] border-t-gray-600':'border-t-[0.1px]'} flex mb-0 flex-row items-center   py-4 px-[8px] md:justify-around justify-between text-[10px] md:text-[14px] `}>
 <span className="flex flex-row gap-2">
            &copy; BLOG 
 
@@ -21,11 +21,8 @@ const Footer = () => {
 <div>
     <ul className="list-none inline-flex gap-2">
         <li>
-            Contact us
+<a href="mailto:arthurkevin1260@gmail.com" >Contact us</a>            
         </li>
-<li>
-    Privacy & Terms
-</li>
     </ul>
 </div>
 

@@ -54,7 +54,7 @@ const {theme}=useContext(MyContext)
   }
 
   return (
-<div className={`${theme ? 'bg-gray-950 text-gray-950':'bg-white text-black'}`}>
+<div className={`${theme ? 'bg-[#121212] text-gray-950':'bg-white text-black'}`}>
 <div className='flex flex-row justify-center items-center h-screen '>
       <div className="bg-white p-8 rounded-lg shadow-lg md:w-[26%] w-[80%] h-[50%]">
         <h1 className="text-3xl font-bold mb-4">Sign In</h1>

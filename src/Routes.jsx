@@ -11,7 +11,7 @@ export default function RoutesHandle(){
   const { theme } = useContext(MyContext);
 
   return (
-    <div className={`${theme ? 'bg-gray-950 shadow-md text-white' : 'bg-white text-black'}`}>
+    <div className={`${theme ? 'bg-[#121212] shadow-md text-white' : 'bg-white text-black'} flex flex-col justify-between`}>
        
 <Navbar/>
 
