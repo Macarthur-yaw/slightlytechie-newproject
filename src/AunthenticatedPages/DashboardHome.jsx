@@ -88,7 +88,7 @@ const DashboardHome = () => {
   }
 
   return (
-    <div onClick={()=>setDisplay(false)}>
+    <div>
     <div  className={`${display ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-20  z-10 ':'bg-white'}`}>
    
    
