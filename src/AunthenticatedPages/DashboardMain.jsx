@@ -13,27 +13,27 @@ e.stopPropagation();
   <span className=''>
 <FaTimes onClick={props.valueHelp} className='border-2 text-black ml-auto rounded-full border-white cursor-pointer hover:bg-gray-300  p-2 text-[35px] transition-bg duration-300 ease-in-out'/>
   </span>
-  <h2 className="md:text-2xl text-md font-bold mb-4">Help and Resources</h2>
+  <h2 className="md:text-2xl  text-black text-md font-bold mb-4">Help and Resources</h2>
   <p className="text-md text-gray-600">
     Welcome to your Dashboard! Here's some helpful information:
   </p>
 
   <div className="mt-4">
-    <h3 className="md:text-xl font-semibold">Navigating the Dashboard</h3>
+    <h3 className="md:text-xl text-black font-semibold">Navigating the Dashboard</h3>
     <p className="text-md text-gray-700">
       You can easily navigate through different sections of the dashboard using the menu or links provided.
     </p>
   </div>
 
   <div className="mt-4">
-    <h3 className="md:text-xl font-semibold">Dashboard Features</h3>
+    <h3 className="md:text-xl text-black font-semibold">Dashboard Features</h3>
     <p className="text-md text-gray-700">
       Explore various features, such as adding and managing posts, accessing your profile, and more.
     </p>
   </div>
 
   <div className="mt-4">
-    <h3 className="md:text-xl font-semibold">Need Assistance?</h3>
+    <h3 className="md:text-xl text-black font-semibold">Need Assistance?</h3>
     <p className="text-base text-gray-700">
       If you have any questions or encounter issues, feel free to contact our support team at
       <a className="text-blue-500" href="mailto:arthurkevin1260@gmail.com"> arthurkevin1260@gmail.com</a>.

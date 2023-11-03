@@ -27,11 +27,11 @@ function applySettings(){
       {/* <h3>Theme Selection</h3> */}
       <div className='inline-flex items-center gap-4 '>
        
-       { theme ? (<div className='inline-flex  items-center'>
-<FaMoon onClick={()=>setTheme(false)}/> &nbsp; Dark
+       { theme ? (<div onClick={()=>setTheme(false)} className='inline-flex  items-center cursor-pointer'>
+<FaMoon /> &nbsp; Dark
 
-       </div>):(<div className='inline-flex items-center'>
-        <FaSun onClick={()=>setTheme(true)}/> &nbsp; Light 
+       </div>):(<div onClick={()=>setTheme(true)}  className='inline-flex items-center cursor-pointer'>
+        <FaSun /> &nbsp; Light 
        </div>)}
       </div>
       {/* <button onClick={()=>applySettings()} className='border-2  rounded-lg md:w-[20%] p-2'>Apply </button> */}
