@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faPlus,faTimes} from "@fortawesome/free-solid-svg-icons";
 // 
 import { FaTrash,FaEdit,FaTimes,FaPlus,FaSearch } from "react-icons/fa";
 import avatarPic from '../assets/avatar.jpg'
+import { MyContext } from "../App";
 const DashboardHome = () => {
   const [display, setDisplay] = useState(false);
   const [blogs, setBlogs] = useState([]);
@@ -14,6 +15,7 @@ const DashboardHome = () => {
   const [info, setInfo] = useState([]);
   const [active, setActive] = useState(false);
   const [updateIndex, setUpdateIndex] = useState(null);
+const {theme}=useContext(MyContext)
 
   useEffect(() => {
     const storedInfo = localStorage.getItem("items");
@@ -114,9 +116,13 @@ function handlePageClick(e){
 
 }
   return (
-    <div>
-    <div  className={`${display ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-20  z-10 ':'bg-white'}`}>
-   
+    <div className="">
+ <div className={`${
+  display
+    ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-20 z-8'
+    : theme ? ' min-h-screen bg-[#121212] text-white ' : 'bg-white text-black'
+}`}
+> 
    
    <div className="md:flex md:flex-row hidden md:block md:ml-auto items-center w-[80%] md:justify-between justify-around p-4 shadow-sm">
         <span>
@@ -143,7 +149,7 @@ function handlePageClick(e){
    
       <div className=" py-2 px-4">
         <button
-          className="ml-auto z-0 text-white border-2 flex flex-row items-center text-sm md:w-[10%] w-[30%] justify-center bg-[#1473E6] border-[#1473E6]  gap-2 border-[2px] p-2 rounded-md"
+          className={`ml-auto z-0  border-2 flex flex-row items-center text-sm md:w-[10%] w-[30%] justify-center ${theme ? 'bg-white text-black border-white font-semibold':'bg-[#1473E6] text-white border-[#1473E6]'}   gap-2 border-[2px] p-2 rounded-md`}
 onClick={changeDisplay}
         >
           {/* <FontAwesomeIcon icon={faPlus}/> */}
@@ -154,17 +160,17 @@ onClick={changeDisplay}
       </div>
      
       {display && (
-  <div onClick={changeDisplay} className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-40">
-    <div onClick={handlePageClick} className="bg-white max-w-md  p-4 rounded-lg shadow-lg">
-    <div className="border-2 w-fit ml-auto border-white">
+  <div onClick={changeDisplay} className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 w-screen h-screen">
+    <div onClick={handlePageClick} className={`${theme ? 'bg-[#121212] text-white':'bg-white'} max-w-md  p-4 rounded-lg shadow-lg`}>
+    <div className=" w-fit ml-auto ">
     <button
-          className="text-black hover:text-red-500"
+          className={`${theme ? 'text-white':'text-black hover:text-red-500'} `}
           onClick={() => setDisplay(false)}
         >
           <FaTimes />
         </button>
 </div>
-      <h1 className="text-2xl font-semibold text-[#0A376E] mb-4">Add New Blog</h1>
+      <h1 className={`text-2xl font-semibold ${theme ? 'text-gray-300':'text-[#0A376E]'}  mb-4 `}>Add New Blog</h1>
       <input
         type="text"
         placeholder="Title"
@@ -188,14 +194,14 @@ onClick={changeDisplay}
       {/* Add your date and image inputs here */}
       {updateIndex !== null ? (
         <button
-          className="bg-[#1473E6] w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300"
+          className={`${theme ? 'bg-gray-500 text-white':'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
           onClick={handleUpdate}
         >
           Update
         </button>
       ) : (
         <button
-          className="bg-[#1473E6] w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300"
+          className={`${theme ? 'bg-gray-500 text-white':'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
           onClick={addBlogs}
         >
           Submit
@@ -239,13 +245,13 @@ onClick={changeDisplay}
                   <td className="md:px-4 md:py-2 text-gray-600 text-sm">{content.source}</td>
                   <td className="md:px-4 md:py-2 inline-flex ">
                     <button
-                      className="border-2 border-transparent hover-bg-[#DAE9FC] transition-bg duration-300 ease-in-out rounded-full p-2 text-[#0C4284] rounded"
+                      className={`${theme ? 'text-gray-200':'text-[#0C4284]'}  border-2 hover-bg-[#DAE9FC] transition-bg duration-300 ease-in-out  rounded-full   p-2         rounded border-transparent                                                 `}
                       onClick={() => updateTask(index)}
                      >
                       <FaEdit />
                     </button>
                     <button
-                      className="border-2 hover-bg-[#DAE9FC] transition-bg duration-300 ease-in-out  rounded-full   p-2         text-[#0C4284] rounded border-transparent                                                 "
+                      className={`${theme ? 'text-gray-200':'text-[#0C4284]'}  border-2 hover-bg-[#DAE9FC] transition-bg duration-300 ease-in-out  rounded-full   p-2         rounded border-transparent                                                 `}
                       onClick={() => deleteTask(index)}
                     >
                       <FaTrash />

@@ -1,42 +1,38 @@
-import  { useContext, useState } from 'react';
-import {FaMoon, FaSun, FaTimes} from 'react-icons/fa'
+import { useContext } from 'react';
+import { FaMoon, FaSun, FaTimes } from 'react-icons/fa';
 import { MyContext } from '../App';
+
 function DashboardSettings(props) {
-  // State to manage theme selection
-  // const [theme, setTheme] = useState('light');
-const {theme,setTheme}=useContext(MyContext)
+  const { theme, setTheme } = useContext(MyContext);
 
-  // Function to toggle between light and dark themes
- 
-  const handleCLick=(e)=>{
-    e.stopPropagation();
-
+  function applySettings() {
+    // Implement your settings application logic here
   }
-function applySettings(){
 
-}
-
+  function handleCLick(e){
+    e.stopPropagation();
+    
+  }
   return (
-    <div onClick={handleCLick} className='flex flex-col gap-2 bg-white text-black md:w-[35%] w-[70%] absolute transform -translate-x-1/2 left-1/2 top-1/2 transform -translate-y-1/2  rounded-md p-4 '>
+    <div onClick={handleCLick} className={`${theme ? 'bg-[#121212] text-white' : 'bg-white'} flex flex-col gap-2 md:w-[35%] w-[70%] absolute transform -translate-x-1/2 left-1/2 top-1/2 transform -translate-y-1/2 rounded-md p-4`}>
+      <FaTimes onClick={props.valueSettings} className='cursor-pointer ml-auto' />
 
-<FaTimes onClick={props.valueSettings} className='cursor-pointer ml-auto'/>
-
-      <h2 className='border-b-[1px] font-semibold text-gray-400'>Theme Settings</h2>
+      <h2 className=' font-semibold text-gray-400'>Theme Settings</h2>
 
       Theme Selection
-      {/* <h3>Theme Selection</h3> */}
-      <div className='inline-flex items-center gap-4 '>
-       
-       {/* {/* { theme ? (<div onClick={()=>setTheme(false)} className='inline-flex  items-center cursor-pointer'>
-<FaMoon /> &nbsp; Dark
-
-       </div>):(<div onClick={()=>setTheme(true)}  className='inline-flex items-center cursor-pointer'>
-        <FaSun /> &nbsp; Light 
-       </div>)} */}
-      </div> 
-      {/* <button onClick={()=>applySettings()} className='border-2  rounded-lg md:w-[20%] p-2'>Apply </button> */}
-     
-   </div>
+      <div className='inline-flex items-center gap-4'>
+        {theme ? (
+          <div onClick={() => setTheme(false)} className='inline-flex items-center cursor-pointer'>
+            <FaMoon /> &nbsp; Dark
+          </div>
+        ) : (
+          <div onClick={() => setTheme(true)} className='inline-flex items-center cursor-pointer'>
+            <FaSun /> &nbsp; Light
+          </div>
+        )}
+      </div>
+      {/* You can add the Apply button and its logic here */}
+    </div>
   );
 }
 
