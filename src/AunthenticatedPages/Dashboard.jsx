@@ -121,7 +121,7 @@ e.stopPropagation();
       </AnimatePresence>
       </div>
       <div className={`${theme ? 'bg-black text-white':''}`} >
-        <div onClick={showDisplay} className={`${theme ? 'text-white z-0': 'text-black '} ${display ? 'hidden':''} md:hidden fixed top-4 left-4 z-10  text-black cursor-pointer`}>
+        <div onClick={showDisplay} className={`${theme ? 'text-white z-0': 'text-black '} ${display ? 'hidden':''} md:hidden fixed top-4 left-4 z-10  text-black cursor-pointer text-[20px]`}>
           <FaBars className='' />
         </div>
         <div className={`${theme ? 'bg-[#121212] text-white border-[0.1px] border-gray-300':'bg-white border-[1px] border-gray-200'} md:block hidden md:w-[20%] md:left-0  left-[20%]  md:w-20   h-[100%] md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>

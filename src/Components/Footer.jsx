@@ -6,7 +6,7 @@ const Footer = () => {
   const { display, theme } = useContext(MyContext);
 
   return (
-    <div className={`text-center py-4 px-8 md:justify-around inline-flex justify-between text-[10px] md:text-[15px] ${theme ? 'bg-[#121212] text-white' : 'bg-white text-black'}`}>
+    <div className={`text-center py-4 px-8 md:justify-around inline-flex justify-between text-[14px] md:text-[15px] ${theme ? 'bg-[#121212] text-white' : 'bg-white text-black'}`}>
       <div className="flex flex-row gap-2">
         &copy; BLOG
         <h1>2023</h1>
