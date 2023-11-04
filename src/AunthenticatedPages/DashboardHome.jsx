@@ -138,28 +138,16 @@ function handlePageClick(e){
    
    <div className="md:flex md:flex-row hidden md:block md:ml-auto items-center w-[80%] md:justify-between justify-around p-4 shadow-sm">
         <span>
-          <h1 className="md:text-[40px] font-bold text-[#0A376E]">Dashboard</h1>
+          <h1 className={`${theme ? 'text-gray-300':'font-bold text-[#0A376E]'} md:text-[40px] `}>Dashboard</h1>
           <h3 className="md:text-[14px] text-[8px] font-semibold text-[#6E6E6E]">Hi Kevin, welcome back!</h3>
         </span>
         
       </div>
+    
    
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-      <div className=" py-2 px-4">
+    <div className=" py-2 px-4">
         <button
           className={`ml-auto z-0  border-2 flex flex-row items-center text-sm md:w-[10%] w-[30%] justify-center ${theme ? 'bg-white text-black border-white font-semibold':'bg-[#1473E6] text-white border-[#1473E6]'}   gap-2 border-[2px] p-2 rounded-md`}
 onClick={changeDisplay}
@@ -172,8 +160,8 @@ onClick={changeDisplay}
       </div>
      
       {display && (
-          <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-40">
-            <div onClick={changeDisplay} className="flex items-center justify-center w-screen h-screen">
+          <div className="  fixed top-0 left-0 w-screen h-screen bg-gray-500 bg-opacity-50 z-40">
+            <div onClick={changeDisplay} className="flex items-center justify-center w-screen h-screen p-2 ">
               <div onClick={handlePageClick} className={`${theme ? 'bg-[#121212] text-white' : 'bg-white'} max-w-md p-4 rounded-lg shadow-lg`}>
                 <div className="w-fit ml-auto">
                   <button
@@ -207,14 +195,14 @@ onClick={changeDisplay}
                 {error && <p className="text-red-500">All fields must be filled.</p>}
                 {updateIndex !== null ? (
                   <button
-                    className={`${theme ? 'bg-gray-500 text-white' : 'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
+                    className={`${theme ? 'bg-gray-500 text-white' : 'bg-[#1473E6] text-white'} w-fit text-sm  p-2 px-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
                     onClick={handleUpdate}
                   >
                     Update
                   </button>
                 ) : (
                   <button
-                    className={`${theme ? 'bg-gray-500 text-white' : 'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
+                    className={`${theme ? 'bg-gray-500 text-white' : 'bg-[#1473E6] text-white'} w-fit text-sm p-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
                     onClick={addBlogs}
                   >
                     Submit

@@ -69,18 +69,20 @@ e.stopPropagation();
   }
 
   return (
-    <div onClick={closeDisplay} className={`${theme ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-40 z-10 ':' '} `}>
+    <div  className={`${theme ? 'fixed top-0 left-0 h-screen w-screen  bg-gray-100 z-10 ':' '} `}>
+      <div className=''>
       <AnimatePresence>
         {display && (
           <motion.div
           onClick={handlePageClick}
-            className={`${theme ? 'bg-gray-950 z-10':''}fixed  top-0 left-0 h-screen w-[60%] md:hidden bg-white shadow-md bg-opacity-100  transition-opacity duration-300 ease-in-out`}
+            className={`${theme ? 'absolute z-10 border-0':''} h-screen w-[60%] md:hidden bg-white shadow-md bg-opacity-100  transition-opacity duration-300 ease-in-out`}
             initial="closed"
             animate="open"
             exit="closed"
             variants={sidebarVariants}
           >
-            <div className={`${theme ? 'bg-[#121212] h-screen text-white z-10':''}`} >
+      <div onClick={closeDisplay} className=''></div>
+            <div className={`${theme ? 'bg-[#121212] h-screen text-white z-10 ':''}`} >
             <div onClick={closeDisplay} className={`cursor-pointer md:hidden ml-auto  flex-end  w-fit p-4  ${theme ? 'text-white':'text-black'} `}>
               <FaTimes />
             </div>
@@ -89,7 +91,7 @@ e.stopPropagation();
      
             <h1 className={`py-4 font-bold text-[20px] ${theme ? 'text-gray-300':'text-[#0C4284]'} `}>BLOGWEB</h1>
             </span>  <ul className="list-none flex flex-col gap-12 md:w-[100%]">
-              <Link to="Home">
+              <Link to="">
                 <li className={`flex flex-row items-center gap-2 p-2 rounded-xl  ${theme ? 'text-gray-300 ':'text-[#0C4284]'} text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer !active:bg-[#DAE9FC] !focus:bg-[#DAE9FC]`}>
                   <FaHome /> Home
                 </li>
@@ -117,15 +119,15 @@ e.stopPropagation();
             </div>     </div> </motion.div>
         )}
       </AnimatePresence>
-
+      </div>
       <div className={`${theme ? 'bg-black text-white':''}`} >
         <div onClick={showDisplay} className={`${theme ? 'text-white z-0': 'text-black '} ${display ? 'hidden':''} md:hidden fixed top-4 left-4 z-10  text-black cursor-pointer`}>
           <FaBars className='' />
         </div>
-        <div className={`${theme ? 'bg-[#121212] text-white':'bg-white'} md:block hidden md:w-[20%] md:left-0  left-[20%]  md:w-20  border-[1px] border-gray-200 h-[100%] md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
-          <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
+        <div className={`${theme ? 'bg-[#121212] text-white border-[0.1px] border-gray-300':'bg-white border-[1px] border-gray-200'} md:block hidden md:w-[20%] md:left-0  left-[20%]  md:w-20   h-[100%] md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
+          <h1 className={`${theme ? 'text-gray-300':'text-[#0C4284]'} py-4 font-bold text-[20px] `}>BLOGWEB</h1>
           <ul className="list-none flex flex-col gap-12">
-            <Link to="">
+            <Link>
               <li className={`flex px-20 flex-row items-center gap-2 p-2 rounded-xl  ${theme ? 'text-gray-300 ':'text-[#0C4284]'} text-[18px] hover:bg-[#DAE9FC] hover:border-[#DAE9FC] hover:text-[#0C4284] cursor-pointer !active:bg-[#DAE9FC] !focus:bg-[#DAE9FC]`}>
                 <FaHome /> Home
               </li>
@@ -147,7 +149,7 @@ e.stopPropagation();
               <FaSignOutAlt /> Log Out
             </li>
           </ul>
-          <span className={`${theme ? 'text-[#121212]':'text-[#0C4284]'} text-sm  `}>&copy; Copyright 2023.</span>
+          <span className={`${theme ? 'text-gray-300':'text-[#0C4284]'} text-sm  `}>&copy; Copyright 2023.</span>
         </div>
       </div>
 

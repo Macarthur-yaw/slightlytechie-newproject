@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className={`bg-${theme ? "bg-[#121212]" : "white"} text-${theme ? "white" : "black"} py-4`}>
-      <div className="container mx-auto flex flex-wrap gap-2 items-center justify-between">
+      <div className="container mx-auto flex flex-row items-center gap-2 items-center justify-between">
         <div className="text-sm">
           &copy; BLOG &nbsp;
           <span className="mr-1">2023</span>
