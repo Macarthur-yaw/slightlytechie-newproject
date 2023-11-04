@@ -118,9 +118,8 @@ function handlePageClick(e){
   return (
     <div className="">
  <div className={`${
-  display
-    ? 'fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-20 z-8'
-    : theme ? ' min-h-screen bg-[#121212] text-white ' : 'bg-white text-black'
+  display ? 'fixed top-0 left-0 min-h-screen w-screen  bg-opacity-20 z-40':''}
+    ${ theme ? ' min-h-screen bg-[#121212] text-white ' : 'bg-white text-black'}
 }`}
 > 
    
@@ -160,7 +159,7 @@ onClick={changeDisplay}
       </div>
      
       {display && (
-  <div onClick={changeDisplay} className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 w-screen h-screen">
+  <div onClick={changeDisplay} className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-40 w-screen h-screen ">
     <div onClick={handlePageClick} className={`${theme ? 'bg-[#121212] text-white':'bg-white'} max-w-md  p-4 rounded-lg shadow-lg`}>
     <div className=" w-fit ml-auto ">
     <button

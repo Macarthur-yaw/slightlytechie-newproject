@@ -15,8 +15,8 @@ export default function DashboardMain(props) {
     <div
       onClick={handleDashboardHelp}
       className={`${
-        theme ? 'bg-[#121212] text-gray-200 border-[#121212]' : 'bg-white'
-      } border-2 md:w-[50%] w-[80%] rounded-md border-white absolute top-1/2 transform -translate-y-1/2 left-1/2 transform -translate-x-1/2 shadow-lg md:p-6 p-2 rounded-md shadow-md`}
+        theme ? 'bg-[#121212] text-gray-200 border-[#121212]' : 'bg-white border-white'
+      } border-2 md:w-[50%] w-[80%] rounded-md  absolute top-1/2 transform -translate-y-1/2 left-1/2 transform -translate-x-1/2 shadow-lg md:p-6 p-2 rounded-md shadow-md`}
     >
       <span className=''>
         <FaTimes

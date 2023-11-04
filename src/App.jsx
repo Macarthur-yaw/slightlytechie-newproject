@@ -7,7 +7,7 @@ import Dashboard from "./AunthenticatedPages/Dashboard";
 import DashboardHome from "./AunthenticatedPages/DashboardHome";
 // import DashboardHelp from "./AunthenticatedPages/DashboardHelp";
 import DashboardMain from "./AunthenticatedPages/DashboardMain";
-import NewPage from "./AunthenticatedPages/NewPage";
+// import NewPage from "./AunthenticatedPages/NewPage";
 import NextPage from "./Pages/NextPage";
 // import Authenticate from "./AunthenticatedPages/Authenticate";
 import { createContext,useState } from "react";
@@ -36,7 +36,7 @@ const App = () => {
         <Route index element={<DashboardHome/>}/>
         {/* <Route path="Help" element={<DashboardHelp/>}/> */}
         <Route path="Main" element={<DashboardMain/>}/>
-<Route path="Add" element={<NewPage/>}/>
+{/* <Route path="Add" element={<NewPage/>}/> */}
 <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Route>
       {/* <Route path='Authenticate' element={<Authenticate/>}/> */}

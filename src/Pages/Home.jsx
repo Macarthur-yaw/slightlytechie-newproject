@@ -15,9 +15,9 @@ const Home = () => {
   console.log(storedInfo)  } else {
       setInfo([
         {
-          text: "Placeholder Blog Post",
-          content: "This is a placeholder blog post. Replace it with your actual content.",
-          source: "Placeholder Author",
+          text: "How to Create a blog on this app",
+          content: "You can create a blog by clicking publish on the footer",
+          source: "Go to the footer to publish a news",
         },
       ]);
     }
