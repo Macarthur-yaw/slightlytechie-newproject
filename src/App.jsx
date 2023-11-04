@@ -26,7 +26,7 @@ const App = () => {
      <Routes>
 
       <Route path='/' element={<RoutesHandle/>}>
-      <Route index path="/" element={<Home/>}/>
+      <Route index  element={<Home/>}/>
       <Route path='/next/:id' element={<NextPage/>}/>
      
       
@@ -37,7 +37,7 @@ const App = () => {
         {/* <Route path="Help" element={<DashboardHelp/>}/> */}
         <Route path="Main" element={<DashboardMain/>}/>
 {/* <Route path="Add" element={<NewPage/>}/> */}
-<Route path="*" element={<p>There's nothing here: 404!</p>} />
+<Route path="*" element={<p> 404!</p>} />
         </Route>
       {/* <Route path='Authenticate' element={<Authenticate/>}/> */}
 
