@@ -15,7 +15,8 @@ const DashboardHome = () => {
   const [info, setInfo] = useState([]);
   const [active, setActive] = useState(false);
   const [updateIndex, setUpdateIndex] = useState(null);
-const {theme}=useContext(MyContext)
+const[error,setError]=useState(false)
+  const {theme}=useContext(MyContext)
 
   useEffect(() => {
     const storedInfo = localStorage.getItem("items");
@@ -42,27 +43,30 @@ const {theme}=useContext(MyContext)
     setModalContent("");
     setModalOpen(false);
   };
-
   function addBlogs() {
-    const initialInput = {
-      text: text,
-      content: content,
-      source: source,
-    };
-  
-    const updatedBlogs = [...blogs, initialInput]; // Add the new article to the existing articles
-  
-    localStorage.setItem("items", JSON.stringify(updatedBlogs)); // Save the updated articles
-  
-    setBlogs(updatedBlogs);
-    setInfo(updatedBlogs);
-  
-    setText("");
-    setContent("");
-    setSource("");
-    setDisplay(false);
-    setActive(false);
-    setUpdateIndex(null);
+    if (isFormValid()) {
+      const initialInput = {
+        text: text,
+        content: content,
+        source: source,
+      };
+
+      const updatedBlogs = [...blogs, initialInput];
+      localStorage.setItem("items", JSON.stringify(updatedBlogs));
+
+      setBlogs(updatedBlogs);
+      setInfo(updatedBlogs);
+
+      setText("");
+      setContent("");
+      setSource("");
+      setDisplay(false);
+      setActive(false);
+      setUpdateIndex(null);
+      setError(false);
+    } else {
+      setError(true);
+    }
   }
     
 
@@ -78,6 +82,9 @@ const {theme}=useContext(MyContext)
     setActive(false);
     setUpdateIndex(null);
   }
+  const isFormValid = () => {
+    return text.trim() !== "" && content.trim() !== "" && source.trim() !== "";
+  };
 
   function updateTask(indexOfElement) {
     const blogToUpdate = info[indexOfElement];
@@ -90,36 +97,42 @@ const {theme}=useContext(MyContext)
   }
 
   function handleUpdate() {
-    const updatedBlogs = info.map((blog, index) => {
-      if (updateIndex === index) {
-        return {
-          text: text,
-          content: content,
-          source: source,
-        };
-      }
-      return blog;
-    });
-
-    setInfo(updatedBlogs);
-    localStorage.setItem("items", JSON.stringify(updatedBlogs));
-
-    setText("");
-    setContent("");
-    setSource("");
-    setDisplay(false);
-    setActive(false);
-    setUpdateIndex(null);
+    if (isFormValid()) {
+      const updatedBlogs = info.map((blog, index) => {
+        if (updateIndex === index) {
+          return {
+            text: text,
+            content: content,
+            source: source,
+          };
+        }
+        return blog;
+      });
+  
+      setInfo(updatedBlogs);
+      localStorage.setItem("items", JSON.stringify(updatedBlogs));
+  
+      setText("");
+      setContent("");
+      setSource("");
+      setDisplay(false);
+      setActive(false);
+      setUpdateIndex(null);
+      setError(false);
+    } else {
+      setError(true);
+    }
   }
+  
+
+
 function handlePageClick(e){
   e.stopPropagation();
 
 }
   return (
-    <div className="">
- <div className={`${
-  display ? 'fixed top-0 left-0 min-h-screen w-screen  bg-opacity-20 z-40':''}
-    ${ theme ? ' min-h-screen bg-[#121212] text-white ' : 'bg-white text-black'}
+    <div>
+ <div className={`${ theme ? ' min-h-screen bg-[#121212] text-white ' : 'bg-white text-black'} 
 }`}
 > 
    
@@ -159,57 +172,58 @@ onClick={changeDisplay}
       </div>
      
       {display && (
-  <div onClick={changeDisplay} className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-40 w-screen h-screen ">
-    <div onClick={handlePageClick} className={`${theme ? 'bg-[#121212] text-white':'bg-white'} max-w-md  p-4 rounded-lg shadow-lg`}>
-    <div className=" w-fit ml-auto ">
-    <button
-          className={`${theme ? 'text-white':'text-black hover:text-red-500'} `}
-          onClick={() => setDisplay(false)}
-        >
-          <FaTimes />
-        </button>
-</div>
-      <h1 className={`text-2xl font-semibold ${theme ? 'text-gray-300':'text-[#0A376E]'}  mb-4 `}>Add New Blog</h1>
-      <input
-        type="text"
-        placeholder="Title"
-        className="w-full p-2 mb-4 border text-black rounded-md"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <textarea
-        placeholder="Content"
-        className="w-full p-2 mb-4 text-black border rounded-md"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Source"
-        className="w-full text-black p-2 mb-4 border rounded-md"
-        value={source}
-        onChange={(e) => setSource(e.target.value)}
-      />
-      {/* Add your date and image inputs here */}
-      {updateIndex !== null ? (
-        <button
-          className={`${theme ? 'bg-gray-500 text-white':'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
-          onClick={handleUpdate}
-        >
-          Update
-        </button>
-      ) : (
-        <button
-          className={`${theme ? 'bg-gray-500 text-white':'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
-          onClick={addBlogs}
-        >
-          Submit
-        </button>
-      )}
-    </div>
-  </div>
-)}
-
+          <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-40">
+            <div onClick={changeDisplay} className="flex items-center justify-center w-screen h-screen">
+              <div onClick={handlePageClick} className={`${theme ? 'bg-[#121212] text-white' : 'bg-white'} max-w-md p-4 rounded-lg shadow-lg`}>
+                <div className="w-fit ml-auto">
+                  <button
+                    className={`${theme ? 'text-white' : 'text-black hover:text-red-500'}`}
+                    onClick={() => setDisplay(false)}
+                  >
+                    <FaTimes />
+                  </button>
+                </div>
+                <h1 className={`text-2xl font-semibold ${theme ? 'text-gray-300' : 'text-[#0A376E]'} mb-4`}>Add New Blog</h1>
+                <input
+                  type="text"
+                  placeholder="Title"
+                  className="w-full p-2 mb-4 border text-black rounded-md"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <textarea
+                  placeholder="Content"
+                  className="w-full p-2 mb-4 text-black border rounded-md"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Source"
+                  className="w-full text-black p-2 mb-4 border rounded-md"
+                  value={source}
+                  onChange={(e) => setSource(e.target.value)}
+                />
+                {error && <p className="text-red-500">All fields must be filled.</p>}
+                {updateIndex !== null ? (
+                  <button
+                    className={`${theme ? 'bg-gray-500 text-white' : 'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
+                    onClick={handleUpdate}
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <button
+                    className={`${theme ? 'bg-gray-500 text-white' : 'bg-[#1473E6]'} w-[15%] text-white py-2 rounded-md hover:bg-[#125EBE] transition-colors duration-300`}
+                    onClick={addBlogs}
+                  >
+                    Submit
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
       <table className="md:w-[80%] w-[100%] md:ml-auto shadow-sm rounded-sm p-2">
             <thead>

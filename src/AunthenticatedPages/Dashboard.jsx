@@ -119,10 +119,10 @@ e.stopPropagation();
       </AnimatePresence>
 
       <div className={`${theme ? 'bg-black text-white':''}`} >
-        <div onClick={showDisplay} className={`${theme ? 'text-white z-0': 'text-black '} ${display ? 'hidden':''} md:hidden fixed top-4 left-4  text-black cursor-pointer`}>
+        <div onClick={showDisplay} className={`${theme ? 'text-white z-0': 'text-black '} ${display ? 'hidden':''} md:hidden fixed top-4 left-4 z-10  text-black cursor-pointer`}>
           <FaBars className='' />
         </div>
-        <div className={`${theme ? 'bg-[#121212] text-white':'bg-white'} md:block hidden md:w-[20%] md:left-0  left-[20%]  md:w-20  border-[1px] border-gray-200 h-[100%] md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-2 items-center`}>
+        <div className={`${theme ? 'bg-[#121212] text-white':'bg-white'} md:block hidden md:w-[20%] md:left-0  left-[20%]  md:w-20  border-[1px] border-gray-200 h-[100%] md:flex md:flex-col md:justify-between p-2 border-t-0 border-l-0 border-b-0 fixed z-10 items-center`}>
           <h1 className="py-4 font-bold text-[20px] text-[#0C4284]">BLOGWEB</h1>
           <ul className="list-none flex flex-col gap-12">
             <Link to="">
