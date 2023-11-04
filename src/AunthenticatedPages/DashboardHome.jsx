@@ -168,20 +168,20 @@ onClick={changeDisplay}
       <input
         type="text"
         placeholder="Title"
-        className="w-full p-2 mb-4 border rounded-md"
+        className="w-full p-2 mb-4 border text-black rounded-md"
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
       <textarea
         placeholder="Content"
-        className="w-full p-2 mb-4 border rounded-md"
+        className="w-full p-2 mb-4 text-black border rounded-md"
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
       <input
         type="text"
         placeholder="Source"
-        className="w-full p-2 mb-4 border rounded-md"
+        className="w-full text-black p-2 mb-4 border rounded-md"
         value={source}
         onChange={(e) => setSource(e.target.value)}
       />

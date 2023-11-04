@@ -64,7 +64,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div onClick={display && closeDisplay} className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'} ${display ? 'fixed bg-gray-950 top-0 left-0 w-screen h-screen z-10 ':'' }`}>
+    <div onClick={display && closeDisplay} className={`${theme ? 'bg-gray-950 text-white' : 'bg-white text-black'} ${display  ?'':'' }`}>
       <AnimatePresence>
         {display && (
           <motion.div
