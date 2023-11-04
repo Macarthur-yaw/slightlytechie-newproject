@@ -6,29 +6,23 @@ const Footer = () => {
   const { display, theme } = useContext(MyContext);
 
   return (
-    <footer className={`bg-${theme ? "bg-[#121212]" : "white"} text-${theme ? "white" : "black"} py-4`}>
-      <div className="container mx-auto flex flex-row items-center gap-2 items-center justify-between">
-        <div className="text-sm">
-          &copy; BLOG &nbsp;
-          <span className="mr-1">2023</span>
-        </div>
-        <div className="mt-2 sm:mt-0">
-          <Link to="/signin" className="text-primary hover:underline">
-            Publish News
-          </Link>
-        </div>
-        <div className="mt-4 sm:mt-0">
-          <ul className="flex space-x-2">
-            <li>
-              <a href="mailto:arthurkevin1260@gmail.com" className="text-primary hover:underline">
-                Contact us
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div className={`text-center py-4 px-8 md:justify-around inline-flex justify-between text-[10px] md:text-[15px] ${theme ? 'bg-[#121212] text-white' : 'bg-white text-black'}`}>
+      <div className="flex flex-row gap-2">
+        &copy; BLOG
+        <h1>2023</h1>
       </div>
-    </footer>
+      <Link to='signin' className="hover:underline hover:font-normal">
+        Publish News
+      </Link>
+      <div>
+        <ul className="list-none inline-flex gap-2">
+          <li>
+            <a href="mailto:arthurkevin1260@gmail.com">Contact us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
-};
+}
 
 export default Footer;
