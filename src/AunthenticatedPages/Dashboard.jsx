@@ -75,7 +75,7 @@ e.stopPropagation();
         {display && (
           <motion.div
           onClick={handlePageClick}
-            className={`${theme ? 'absolute z-10 border-0':'absolute'} h-screen w-[60%] md:hidden bg-white shadow-md bg-opacity-100  transition-opacity duration-300 ease-in-out`}
+            className={`${theme ? 'absolute z-10 border-0':'absolute z-10'} h-screen w-[60%] md:hidden bg-white shadow-md bg-opacity-100  transition-opacity duration-300 ease-in-out`}
             initial="closed"
             animate="open"
             exit="closed"
